@@ -17,6 +17,10 @@ public class ResourceBundleUtils {
         return Objects.isNull(bundle) ? Optional.empty() : Optional.of(bundle);
     }
 
+    public static ResourceBundle getBundle(String languageCode) {
+        return getBundleOrError(new Locale(languageCode));
+    }
+
     /**
      * @param locale
      * @return ResourceBundle

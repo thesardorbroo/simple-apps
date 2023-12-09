@@ -4,10 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5a0ea6a-5607-4e55-b0e3-3e929a2c8f30" name="Changes" comment="Simple music finder bot is started. Testing spring-boot-starter-fluent lib.">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="f5a0ea6a-5607-4e55-b0e3-3e929a2c8f30" name="Changes" comment="ResourceBundle is fixed. IDE is fixed.">
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/controller/MusicDownloadController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/MusicDownloadService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/MusicService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/SpotifyMusicService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/AudioMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/MusicDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/PageDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/spotify/SpotifyArtistDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/spotify/SpotifyDataDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/spotify/SpotifyMusicDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/spotify/SpotifyRootTrack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/spotify/SpotifyTrack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/spotify/SpotifyTrackWithDownloadUri.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/enumeration/MusicSourceType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicDownloadServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicServiceSimulate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/SongCommandServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/SpotifyMusicServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/BotClientService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/SpotifyClientService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/BotClientServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/SpotifyClientServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/SendMessageUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/controller/CommandController.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/controller/CommandController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/CommandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/CommandService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/CommandManagerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/CommandManagerServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/StartHelpCommandServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/StartHelpCommandServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/AbsSenderUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/AbsSenderUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/ResourceBundleUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/ResourceBundleUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/resources/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/resources/messages.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/resources/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/resources/messages_en.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/resources/messages_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/resources/messages_ru.properties" afterDir="false" />
@@ -109,15 +139,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MusicfinderbotApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <configuration name="MusicfinderbotApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="musicfinderbot" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="uz.sardorbroo.musicfinderbot.MusicfinderbotApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="uz.sardorbroo.musicfinderbot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.MusicfinderbotApplication" />
         <item itemvalue="Application.ApartmentApplication" />
       </list>
     </recent_temporary>
@@ -134,7 +171,8 @@
       <workItem from="1702045697595" duration="12789000" />
       <workItem from="1702100158886" duration="718000" />
       <workItem from="1702103392016" duration="387000" />
-      <workItem from="1702103801184" duration="397000" />
+      <workItem from="1702103801184" duration="26391000" />
+      <workItem from="1702150942308" duration="6282000" />
     </task>
     <task id="LOCAL-00001" summary="Apartments CRUD is done! But we can refactor this more)">
       <created>1702041799132</created>
@@ -150,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702100368097</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ResourceBundle is fixed. IDE is fixed.">
+      <created>1702104219169</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1702104219169</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -201,7 +246,8 @@
     </ignored-roots>
     <MESSAGE value="Apartments CRUD is done! But we can refactor this more)" />
     <MESSAGE value="Simple music finder bot is started. Testing spring-boot-starter-fluent lib." />
-    <option name="LAST_COMMIT_MESSAGE" value="Simple music finder bot is started. Testing spring-boot-starter-fluent lib." />
+    <MESSAGE value="ResourceBundle is fixed. IDE is fixed." />
+    <option name="LAST_COMMIT_MESSAGE" value="ResourceBundle is fixed. IDE is fixed." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

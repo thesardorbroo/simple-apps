@@ -33,7 +33,7 @@ public class CommandManagerServiceImpl implements CommandManagerService {
     }
 
     public Optional<SendMessage> command(Update update) {
-        log.debug("Start command is send!");
+        log.debug("Start managing command and answering to the user");
 
         if (isUpdateValid(update)) {
             log.warn("Invalid argument is passed! Update.Message.From must not be null!");
@@ -56,7 +56,7 @@ public class CommandManagerServiceImpl implements CommandManagerService {
     private Optional<Command> resolve(String text) {
 
         return Arrays.stream(Command.values())
-                .filter(command -> Objects.equals(command.getText(), text))
+                .filter(command -> Objects.equals(command.getText(), text) || text.startsWith(command.getText()))
                 .findAny();
     }
 

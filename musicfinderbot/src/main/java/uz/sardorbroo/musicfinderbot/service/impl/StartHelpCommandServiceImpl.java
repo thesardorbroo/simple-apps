@@ -1,6 +1,7 @@
 package uz.sardorbroo.musicfinderbot.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -25,18 +26,12 @@ public class StartHelpCommandServiceImpl implements CommandService {
     }
 
     @Override
-    public Collection<Command> getSupportedCommands() {
-        return SUPPORTED_COMMANDS;
-    }
-
-    @Override
     public Optional<SendMessage> execute(Update update) {
         log.debug("User send '/start' command!");
 
         User user = UserUtils.extractUserOrThrow(update);
 
-        // Todo: should fix locale.
-        String message = buildMessage(Locale.ENGLISH);
+        String message = buildMessage(user.getLanguageCode());
 
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText(message);
@@ -45,14 +40,14 @@ public class StartHelpCommandServiceImpl implements CommandService {
         return Optional.of(sendMessage);
     }
 
-    private String buildMessage(Locale locale) {
+    private String buildMessage(String languageCode) {
 
-        if (Objects.isNull(locale)) {
-            log.warn("Invalid argument is passed! Locale must not be null!");
-            throw new IllegalArgumentException("Invalid argument is passed! Locale must not be null!");
+        if (StringUtils.isBlank(languageCode)) {
+            log.warn("Invalid argument is passed! LanguageCode must not be empty!");
+            throw new IllegalArgumentException("Invalid argument is passed! LanguageCode must not be empty!");
         }
 
-        ResourceBundle bundle = ResourceBundleUtils.getBundleOrError(locale);
+        ResourceBundle bundle = ResourceBundleUtils.getBundle(languageCode);
 
         StringBuilder builder = new StringBuilder(bundle.getString(KEY_4_MESSAGE) + "\n\n");
 

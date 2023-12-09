@@ -24,7 +24,7 @@ public class CommandController {
 
     @HandleMessage(value = "/", scope = MatchScope.START_WITH)
     public void commandHandler(Update update, AbsSender sender) {
-        log.debug("Start command is send");
+        log.debug("Command is send");
         Optional<SendMessage> messageOptional = commandManagerService.command(update);
         messageOptional.ifPresent(sendMessage -> AbsSenderUtils.send(sender, sendMessage));
         log.debug("Successfully answered!");
