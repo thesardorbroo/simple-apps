@@ -6,17 +6,16 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import uz.sardorbroo.musicfinderbot.service.MusicService;
 import uz.sardorbroo.musicfinderbot.service.dto.MusicDTO;
+import uz.sardorbroo.musicfinderbot.service.dto.MusicResourceDTO;
 import uz.sardorbroo.musicfinderbot.service.dto.PageDTO;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Service
 @ConditionalOnProperty(prefix = "music.service", name = "simulate", havingValue = "true")
 // Todo: should move the strings to Java POJO
+// Todo: should override simulate of downloading
 public class MusicServiceSimulate implements MusicService {
 
     @Override
@@ -37,8 +36,8 @@ public class MusicServiceSimulate implements MusicService {
     }
 
     @Override
-    public byte[] download(String musicId) {
-        return new byte[0];
+    public Optional<MusicResourceDTO> download(String musicId) {
+        return Optional.empty();
     }
 
     private MusicDTO build(String name, int index) {

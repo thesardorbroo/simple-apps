@@ -10,6 +10,7 @@ import java.net.URI;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Data
 @NoArgsConstructor
@@ -45,6 +46,8 @@ public class SpotifyTrack {
 
     public String joinArtists() {
         StringBuilder artistsNames = new StringBuilder();
+
+        if (Objects.isNull(artists)) return "";
 
         artists.stream()
                 .map(SpotifyArtistDTO::getName)

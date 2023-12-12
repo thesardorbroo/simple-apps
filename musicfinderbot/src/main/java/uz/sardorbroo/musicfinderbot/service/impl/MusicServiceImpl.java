@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 import uz.sardorbroo.musicfinderbot.service.MusicService;
 import uz.sardorbroo.musicfinderbot.service.SpotifyMusicService;
 import uz.sardorbroo.musicfinderbot.service.dto.MusicDTO;
+import uz.sardorbroo.musicfinderbot.service.dto.MusicResourceDTO;
 import uz.sardorbroo.musicfinderbot.service.dto.PageDTO;
 import uz.sardorbroo.musicfinderbot.service.dto.spotify.SpotifyDataDTO;
 import uz.sardorbroo.musicfinderbot.service.dto.spotify.SpotifyMusicDTO;
 import uz.sardorbroo.musicfinderbot.service.dto.spotify.SpotifyTrack;
+import uz.sardorbroo.musicfinderbot.service.dto.spotify.SpotifyTrackResourceDTO;
 import uz.sardorbroo.musicfinderbot.service.enumeration.MusicSourceType;
 
 import java.util.Collections;
@@ -23,7 +25,6 @@ import java.util.stream.Collectors;
 @Service
 @ConditionalOnProperty(prefix = "music.service", name = "simulate", havingValue = "false", matchIfMissing = true)
 public class MusicServiceImpl implements MusicService {
-    private final static byte[] EMPTY_BYTE_ARRAY = new byte[0];
     private final SpotifyMusicService spotifyMusicService;
 
     public MusicServiceImpl(SpotifyMusicService spotifyMusicService) {
@@ -46,15 +47,22 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    public byte[] download(String musicId) {
+    public Optional<MusicResourceDTO> download(String musicId) {
         log.debug("Downloading music by ID. MusicID: {}", musicId);
 
         if (StringUtils.isBlank(musicId)) {
             log.warn("Invalid argument is passed! MusicID must not be null!");
-            return EMPTY_BYTE_ARRAY;
+            return Optional.empty();
         }
 
-        return spotifyMusicService.download(musicId);
+        Optional<SpotifyTrackResourceDTO> trackOptional = spotifyMusicService.download(musicId);
+        if (trackOptional.isEmpty()) {
+            log.warn("Music is not downloaded!");
+            return Optional.empty();
+        }
+
+        MusicResourceDTO music = convertToResource(trackOptional.get());
+        return Optional.of(music);
     }
 
 
@@ -79,5 +87,19 @@ public class MusicServiceImpl implements MusicService {
                 .setArtist(track.joinArtists())
                 .setUrl2Download(track.getUri())
                 .setDuration(track.getDuration());
+    }
+
+    private MusicResourceDTO convertToResource(SpotifyTrackResourceDTO track) {
+        MusicDTO music = convert(track);
+
+        MusicResourceDTO musicResource = new MusicResourceDTO();
+        musicResource.setId(music.getId());
+        musicResource.setTitle(music.getTitle());
+        musicResource.setDuration(music.getDuration());
+        musicResource.setArtist(music.getArtist());
+        musicResource.setUrl2Download(music.getUrl2Download());
+
+        musicResource.setInputStream(track.getInputStream());
+        return musicResource;
     }
 }

@@ -4,8 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5a0ea6a-5607-4e55-b0e3-3e929a2c8f30" name="Changes" comment="Telegram bot is integrated to Spotify. Some simulations are implemented. User can search musics by name from Spotify. Pagination is implemented, but not ready. Application can download musics from Spotify but cannot send via Telegram.">
+    <list default="true" id="f5a0ea6a-5607-4e55-b0e3-3e929a2c8f30" name="Changes" comment="workspace.xml is changed! don't think about this commit">
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/MusicResourceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/spotify/SpotifyTrackResourceDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/resources/photo_2023-09-18_22-00-20.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/MusicfinderbotApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/MusicfinderbotApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/controller/CommandController.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/controller/CommandController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/MusicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/MusicService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/SpotifyMusicService.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/SpotifyMusicService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/MusicDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/MusicDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/spotify/SpotifyTrack.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/dto/spotify/SpotifyTrack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicDownloadServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicDownloadServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicServiceSimulate.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicServiceSimulate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/SpotifyMusicServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/SpotifyMusicServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,27 +71,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/thesardorbroo/Devops-projects/simple-apps/apartments/src/main/java/uz/sardorbroo/apartments&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;0215526b41ab83ac1584e3421f8cf37b&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "corretto-17",
+    "last_opened_file_path": "C:/Users/thesardorbroo/Devops-projects/simple-apps/musicfinderbot/src/main/resources",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "File.Encoding",
+    "spring.configuration.checksum": "0215526b41ab83ac1584e3421f8cf37b"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\thesardorbroo\Devops-projects\simple-apps\musicfinderbot\src\main\resources" />
       <recent name="C:\Users\thesardorbroo\Devops-projects\simple-apps\apartments\src\main\java\uz\sardorbroo\apartments" />
       <recent name="C:\Users\thesardorbroo\Devops-projects\simple-apps\apartments\src\main\java" />
     </key>
