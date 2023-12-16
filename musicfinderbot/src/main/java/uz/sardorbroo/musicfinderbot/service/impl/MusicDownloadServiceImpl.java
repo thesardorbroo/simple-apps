@@ -9,8 +9,8 @@ import org.telegram.telegrambots.meta.api.objects.User;
 import uz.sardorbroo.musicfinderbot.service.MusicDownloadService;
 import uz.sardorbroo.musicfinderbot.service.MusicService;
 import uz.sardorbroo.musicfinderbot.service.dto.MusicResourceDTO;
+import uz.sardorbroo.musicfinderbot.service.utils.UserUtils;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -22,11 +22,10 @@ public class MusicDownloadServiceImpl implements MusicDownloadService {
         this.musicService = musicService;
     }
 
-    // Todo: should optimize
     public Optional<SendAudio> download(Update update) {
         log.debug("Start downloading music by ID");
 
-        User user = update.getCallbackQuery().getFrom();
+        User user = UserUtils.extractUserOrThrow(update);
         String musicIdAsMessage = update.getCallbackQuery().getData();
 
         Optional<MusicResourceDTO> musicOptional = musicService.download(musicIdAsMessage);
@@ -35,35 +34,20 @@ public class MusicDownloadServiceImpl implements MusicDownloadService {
             return Optional.empty();
         }
 
-        Optional<InputFile> inputFileOptional = convert(musicOptional.get());
-        if (inputFileOptional.isEmpty()) {
-            log.warn("Cannot download music! Music is not found! MusicID: {}", musicIdAsMessage);
-            return Optional.empty();
-        }
+        InputFile inputFile = convert(musicOptional.get());
 
         SendAudio audio = new SendAudio();
-        audio.setAudio(inputFileOptional.get());
+        audio.setAudio(inputFile);
         audio.setChatId(user.getId());
 
         return Optional.of(audio);
     }
 
-    private Optional<InputFile> convert(MusicResourceDTO music) {
+    private InputFile convert(MusicResourceDTO music) {
 
-        if (Objects.isNull(music)) {
-            log.warn("Invalid argument is passed! MusicArray must not be empty!");
-            return Optional.empty();
-        }
+        InputFile inputFile = new InputFile();
+        inputFile.setMedia(music.getInputStream(), music.getTitle());
 
-        try {
-
-            InputFile inputFile = new InputFile();
-            inputFile.setMedia(music.getInputStream(), music.getTitle());
-
-            return Optional.of(inputFile);
-        } catch (Exception e) {
-            log.warn("Error while converting MusicByteArray to File! Exception: {}", e.getMessage());
-            return Optional.empty();
-        }
+        return inputFile;
     }
 }

@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5a0ea6a-5607-4e55-b0e3-3e929a2c8f30" name="Changes" comment="Bot can download(from Spotify) and send selected audio. But should optimize and added some features.">
+    <list default="true" id="f5a0ea6a-5607-4e55-b0e3-3e929a2c8f30" name="Changes" comment="no metter">
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/MusicTempStorageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicTempMapStorageServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/service/UserExtractor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/service/impl/CallbackQueryUserExtractor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/service/impl/MessageUserExtractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicDownloadServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicDownloadServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/UserUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/UserUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +46,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -56,25 +69,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "corretto-17",
-    "last_opened_file_path": "C:/Users/thesardorbroo/Devops-projects/simple-apps/musicfinderbot/src/main/resources",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "File.Encoding",
-    "spring.configuration.checksum": "0215526b41ab83ac1584e3421f8cf37b"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/thesardorbroo/Devops-projects/simple-apps/musicfinderbot/src/main/resources&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;0215526b41ab83ac1584e3421f8cf37b&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\thesardorbroo\Devops-projects\simple-apps\musicfinderbot\src\main\resources" />
@@ -139,6 +152,9 @@
       <workItem from="1702103801184" duration="26391000" />
       <workItem from="1702150942308" duration="7063000" />
       <workItem from="1702190060777" duration="628000" />
+      <workItem from="1702617439207" duration="1314000" />
+      <workItem from="1702704836109" duration="1427000" />
+      <workItem from="1702750137674" duration="2272000" />
     </task>
     <task id="LOCAL-00001" summary="Apartments CRUD is done! But we can refactor this more)">
       <created>1702041799132</created>
