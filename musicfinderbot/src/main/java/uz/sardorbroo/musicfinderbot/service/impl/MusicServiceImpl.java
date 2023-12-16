@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import uz.sardorbroo.musicfinderbot.service.MusicService;
+import uz.sardorbroo.musicfinderbot.service.MusicTempStorageService;
 import uz.sardorbroo.musicfinderbot.service.SpotifyMusicService;
 import uz.sardorbroo.musicfinderbot.service.dto.MusicDTO;
 import uz.sardorbroo.musicfinderbot.service.dto.MusicResourceDTO;
@@ -26,9 +27,11 @@ import java.util.stream.Collectors;
 @ConditionalOnProperty(prefix = "music.service", name = "simulate", havingValue = "false", matchIfMissing = true)
 public class MusicServiceImpl implements MusicService {
     private final SpotifyMusicService spotifyMusicService;
+    private final MusicTempStorageService tempStorageService;
 
-    public MusicServiceImpl(SpotifyMusicService spotifyMusicService) {
+    public MusicServiceImpl(SpotifyMusicService spotifyMusicService, MusicTempStorageService tempStorageService) {
         this.spotifyMusicService = spotifyMusicService;
+        this.tempStorageService = tempStorageService;
     }
 
     @Override
@@ -42,6 +45,9 @@ public class MusicServiceImpl implements MusicService {
         }
 
         List<MusicDTO> spotifyMusics = convert(musicsOptional.get());
+
+        saveAllMusic2TempStorage(spotifyMusics);
+
         log.debug("Musics are fetch successfully! Musics: {}", spotifyMusics.size());
         return spotifyMusics;
     }
@@ -61,10 +67,19 @@ public class MusicServiceImpl implements MusicService {
             return Optional.empty();
         }
 
-        MusicResourceDTO music = convertToResource(trackOptional.get());
-        return Optional.of(music);
+        return convertToResource(trackOptional.get());
     }
 
+    private void saveAllMusic2TempStorage(List<MusicDTO> musics) {
+        log.debug("Saving all musics to temporary storage");
+
+        if (Objects.isNull(musics) || musics.isEmpty()) {
+            log.warn("Invalid argument is passed! Musics collections must not be empty!");
+            return;
+        }
+
+        musics.forEach(tempStorageService::save);
+    }
 
     private List<MusicDTO> convert(SpotifyMusicDTO spotifyMusics) {
 
@@ -89,8 +104,15 @@ public class MusicServiceImpl implements MusicService {
                 .setDuration(track.getDuration());
     }
 
-    private MusicResourceDTO convertToResource(SpotifyTrackResourceDTO track) {
-        MusicDTO music = convert(track);
+    private Optional<MusicResourceDTO> convertToResource(SpotifyTrackResourceDTO track) {
+        Optional<MusicDTO> musicOptional = tempStorageService.getById(track.getId());
+
+        if (musicOptional.isEmpty()) {
+            log.warn("Music is not found from temporary storage! MusicID: {}", track.getId());
+            return Optional.empty();
+        }
+
+        MusicDTO music = musicOptional.get();
 
         MusicResourceDTO musicResource = new MusicResourceDTO();
         musicResource.setId(music.getId());
@@ -100,6 +122,6 @@ public class MusicServiceImpl implements MusicService {
         musicResource.setUrl2Download(music.getUrl2Download());
 
         musicResource.setInputStream(track.getInputStream());
-        return musicResource;
+        return Optional.of(musicResource);
     }
 }
