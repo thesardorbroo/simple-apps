@@ -2,14 +2,20 @@ package uz.sardorbroo.musicfinderbot.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
+import uz.sardorbroo.musicfinderbot.config.constants.CacheType;
 import uz.sardorbroo.musicfinderbot.service.MusicTempStorageService;
 import uz.sardorbroo.musicfinderbot.service.dto.MusicDTO;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 @Slf4j
 @Service
+@ConditionalOnProperty(prefix = "cache.storage", name = "type", havingValue = CacheType.JAVA_MAP)
 public class MusicTempMapStorageServiceImpl implements MusicTempStorageService {
 
     private static final Map<String, MusicDTO> MUSICS_STORAGE = new HashMap<>();
