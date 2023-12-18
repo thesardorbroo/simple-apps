@@ -23,6 +23,6 @@ public class CallbackQueryUserExtractor implements UserExtractor {
     }
 
     private boolean isMessageUserNull(Update update) {
-        return Objects.nonNull(update) && Objects.nonNull(update.getMessage()) && Objects.nonNull(update.getMessage().getFrom());
+        return Objects.nonNull(update) && Objects.nonNull(update.getCallbackQuery()) && Objects.nonNull(update.getCallbackQuery().getFrom());
     }
 }

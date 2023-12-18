@@ -1,40 +1,45 @@
 package uz.sardorbroo.musicfinderbot.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
+import uz.sardorbroo.musicfinderbot.config.constants.CacheType;
 import uz.sardorbroo.musicfinderbot.service.MusicTempStorageService;
 import uz.sardorbroo.musicfinderbot.service.dto.MusicDTO;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 @Slf4j
 @Service
+@ConditionalOnProperty(prefix = "cache.storage", name = "type", havingValue = CacheType.JAVA_MAP)
 public class MusicTempMapStorageServiceImpl implements MusicTempStorageService {
 
-    private static final Map<UUID, MusicDTO> MUSICS_STORAGE = new HashMap<>();
+    private static final Map<String, MusicDTO> MUSICS_STORAGE = new HashMap<>();
 
     @Override
-    public Optional<UUID> save(MusicDTO music) {
+    public Optional<String> save(MusicDTO music) {
         log.debug("Save musics to temp Map storage");
 
-        if (Objects.isNull(music)) {
-            log.warn("Invalid argument is passed! MusicDTO must not be null!");
+        if (Objects.isNull(music) || StringUtils.isBlank(music.getId())) {
+            log.warn("Invalid argument is passed! MusicDTO.ID must not be empty!");
             return Optional.empty();
         }
 
-        UUID key4Music = UUID.randomUUID();
+        MUSICS_STORAGE.put(music.getId(), music);
 
-        MUSICS_STORAGE.put(key4Music, music);
-
-        return Optional.of(key4Music);
+        return Optional.of(music.getId());
     }
 
     @Override
-    public Optional<MusicDTO> getById(UUID musicId) {
+    public Optional<MusicDTO> getById(String musicId) {
         log.debug("Get stored music by ID! ID: {}", musicId);
 
-        if (Objects.isNull(musicId)) {
-            log.warn("Invalid argument is passed! MusicID must not be null!");
+        if (StringUtils.isBlank(musicId)) {
+            log.warn("Invalid argument is passed! MusicID must not be empty!");
             return Optional.empty();
         }
 

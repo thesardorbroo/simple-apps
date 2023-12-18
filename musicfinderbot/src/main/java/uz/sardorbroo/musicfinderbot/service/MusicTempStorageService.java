@@ -7,8 +7,8 @@ import java.util.UUID;
 
 public interface MusicTempStorageService {
 
-    Optional<UUID> save(MusicDTO music);
+    Optional<String> save(MusicDTO music);
 
-    Optional<MusicDTO> getById(UUID musicId);
+    Optional<MusicDTO> getById(String musicId);
 
 }
