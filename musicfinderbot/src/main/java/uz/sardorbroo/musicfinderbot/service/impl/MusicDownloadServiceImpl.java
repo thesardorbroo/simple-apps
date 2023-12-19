@@ -1,6 +1,7 @@
 package uz.sardorbroo.musicfinderbot.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendAudio;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -9,7 +10,9 @@ import org.telegram.telegrambots.meta.api.objects.User;
 import uz.sardorbroo.musicfinderbot.service.MusicDownloadService;
 import uz.sardorbroo.musicfinderbot.service.MusicService;
 import uz.sardorbroo.musicfinderbot.service.dto.MusicResourceDTO;
+import uz.sardorbroo.musicfinderbot.service.utils.CallbackDataExtractorUtils;
 import uz.sardorbroo.musicfinderbot.service.utils.UserUtils;
+import uz.sardorbroo.musicfinderbot.service.utils.service.dto.MusicCallbackDTO;
 
 import java.util.Optional;
 
@@ -26,7 +29,12 @@ public class MusicDownloadServiceImpl implements MusicDownloadService {
         log.debug("Start downloading music by ID");
 
         User user = UserUtils.extractUserOrThrow(update);
-        String musicIdAsMessage = update.getCallbackQuery().getData();
+        Optional<MusicCallbackDTO> musicCallbackOptional = CallbackDataExtractorUtils.extractMusicCallback(update);
+        if (musicCallbackOptional.isEmpty()) {
+            log.warn("MusicID is not found!");
+            return Optional.empty();
+        }
+        String musicIdAsMessage = musicCallbackOptional.get().getMusicId();
 
         Optional<MusicResourceDTO> musicOptional = musicService.download(musicIdAsMessage);
         if (musicOptional.isEmpty()) {

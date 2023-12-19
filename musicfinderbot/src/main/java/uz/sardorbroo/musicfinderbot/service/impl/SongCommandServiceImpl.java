@@ -1,5 +1,6 @@
 package uz.sardorbroo.musicfinderbot.service.impl;
 
+import jakarta.ws.rs.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -8,9 +9,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import uz.sardorbroo.musicfinderbot.enumeration.Command;
 import uz.sardorbroo.musicfinderbot.service.CommandService;
+import uz.sardorbroo.musicfinderbot.service.MusicCatalogButtonService;
 import uz.sardorbroo.musicfinderbot.service.MusicService;
 import uz.sardorbroo.musicfinderbot.service.dto.MusicDTO;
 import uz.sardorbroo.musicfinderbot.service.dto.PageDTO;
@@ -24,19 +25,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @Service
 public class SongCommandServiceImpl implements CommandService {
-    private static final String PREVIOUS_BUTTON_TEXT = "⬅️";
-    private static final String CANCEL_BUTTON_TEXT = "❌";
-    private static final String CANCEL_BUTTON_CALLBACK = "CANCEL";
-    private static final String NEXT_BUTTON_TEXT = "➡️";
+    private static final PageDTO DEFAULT_PAGEABLE = new PageDTO(0, 10);
 
     private static final String SPLITERATOR_PREFIX = " ";
     private static final String MUSIC_NOT_FOUND_KEY = "music.not.found";
     private static final Command SUPPORTED_COMMAND = Command.SONG;
 
     private final MusicService musicService;
+    private final MusicCatalogButtonService musicCatalogButtonService;
 
-    public SongCommandServiceImpl(MusicService musicService) {
+    public SongCommandServiceImpl(MusicService musicService, MusicCatalogButtonService musicCatalogButtonService) {
         this.musicService = musicService;
+        this.musicCatalogButtonService = musicCatalogButtonService;
     }
 
     @Override
@@ -56,13 +56,13 @@ public class SongCommandServiceImpl implements CommandService {
                 .filter(pieceOfMessage -> !Objects.equals(SUPPORTED_COMMAND.getText(), pieceOfMessage))
                 .forEach(pieceOfMessage -> musicName.append(pieceOfMessage).append(" "));
 
-        List<MusicDTO> musics = musicService.find(musicName.toString(), new PageDTO(0, 10));
+        List<MusicDTO> musics = musicService.find(musicName.toString(), DEFAULT_PAGEABLE);
         if (musics.isEmpty()) {
             log.debug("Musics are not found! Music name: {}", musicName);
             return Optional.of(musicNotFound(user));
         }
 
-        return Optional.of(buildMessage(user, musics));
+        return Optional.of(buildMessage(user, musics, DEFAULT_PAGEABLE, musicName.toString()));
     }
 
     @Override
@@ -101,11 +101,12 @@ public class SongCommandServiceImpl implements CommandService {
         return message;
     }
 
-    private SendMessage buildMessage(User user, List<MusicDTO> musics) {
+    private SendMessage buildMessage(User user, List<MusicDTO> musics, PageDTO pagination, String musicName) {
 
         String text = buildMessageText(musics);
 
-        InlineKeyboardMarkup inlineMarkup = (InlineKeyboardMarkup) buildButtons(musics);
+        InlineKeyboardMarkup inlineMarkup = (InlineKeyboardMarkup) buildButtons(musics, pagination, musicName)
+                .orElseThrow(() -> new NotFoundException("Inline buttons are not found!"));
 
         SendMessage message = new SendMessage();
         message.setChatId(user.getId());
@@ -115,6 +116,10 @@ public class SongCommandServiceImpl implements CommandService {
         return message;
     }
 
+    private Optional<ReplyKeyboard> buildButtons(List<MusicDTO> musics, PageDTO pagination, String musicName) {
+        return musicCatalogButtonService.buildButtons(musics, pagination, musicName);
+    }
+
     private String buildMessageText(List<MusicDTO> musics) {
 
         AtomicInteger counter = new AtomicInteger(1);
@@ -122,57 +127,10 @@ public class SongCommandServiceImpl implements CommandService {
         StringBuilder text = new StringBuilder();
 
         musics.forEach(music -> {
-            String line = String.format("%d. %s - %s | %s\n", counter.getAndIncrement(), music.getArtist(), music.getTitle(), String.valueOf(music.getDuration()));
+            String line = String.format("%d. %s - %s | %s\n", counter.getAndIncrement(), music.getArtist(), music.getTitle(), music.getDuration());
             text.append(line);
         });
 
         return text.toString();
-    }
-
-
-    // Todo: Should optimize this.
-    // Todo: Should implement pagination logic
-    private ReplyKeyboard buildButtons(List<MusicDTO> musics) {
-
-        AtomicInteger counter = new AtomicInteger(1);
-
-        InlineKeyboardMarkup inline = new InlineKeyboardMarkup();
-
-        List<List<InlineKeyboardButton>> allButtons = new ArrayList<>();
-        List<InlineKeyboardButton> buttons = new ArrayList<>();
-        for (MusicDTO music : musics) {
-
-            if (buttons.size() == 5) {
-                allButtons.add(buttons);
-                buttons = new ArrayList<>();
-            }
-
-            buttons.add(buildButton(String.valueOf(counter.getAndIncrement()), String.valueOf(music.getId())));
-        }
-
-        if (buttons.size() != 0) {
-            allButtons.add(buttons);
-        }
-
-
-        allButtons.add(buildControllerButtons());
-        inline.setKeyboard(allButtons);
-
-        return inline;
-    }
-
-    private List<InlineKeyboardButton> buildControllerButtons() {
-        return List.of(
-                buildButton(PREVIOUS_BUTTON_TEXT, "NULL"),
-                buildButton(CANCEL_BUTTON_TEXT, CANCEL_BUTTON_CALLBACK),
-                buildButton(NEXT_BUTTON_TEXT, "NULL")
-        );
-    }
-
-    private InlineKeyboardButton buildButton(String text, String callback) {
-        return InlineKeyboardButton.builder()
-                .text(text)
-                .callbackData(callback)
-                .build();
     }
 }
