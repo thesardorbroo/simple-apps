@@ -2,7 +2,6 @@ package uz.sardorbroo.musicfinderbot.service.impl;
 
 import jakarta.ws.rs.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -11,7 +10,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
 import uz.sardorbroo.musicfinderbot.service.MusicCatalogButtonService;
 import uz.sardorbroo.musicfinderbot.service.MusicCatalogService;
 import uz.sardorbroo.musicfinderbot.service.MusicService;
@@ -31,7 +29,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @Service
 public class MusicCatalogServiceImpl implements MusicCatalogService {
-    private static final String MUSIC_NOT_FOUND_KEY = "no.more.pages";
+    private static final String NO_MORE_PAGES = "no.more.pages";
+    private static final String MUSIC_NOT_FOUND = "music.not.found";
     private static final String SEARCHING_CANCELED = "searching.canceled";
 
     private final MusicService musicService;
@@ -42,7 +41,7 @@ public class MusicCatalogServiceImpl implements MusicCatalogService {
         this.musicCatalogButtonService = musicCatalogButtonService;
     }
 
-    public Optional<SendMessage> resolveCallback(Update update) {
+    public Optional<EditMessageText> controlPagination(Update update) {
 
         User user = UserUtils.extractUserOrThrow(update);
 
@@ -55,7 +54,8 @@ public class MusicCatalogServiceImpl implements MusicCatalogService {
         PaginationCallbackDTO paginationCallback = paginationCallbackOptional.get();
         if (isPageNegative(paginationCallback.getPage())) {
             log.debug("Page is negative! Page: {}", paginationCallback.getPage());
-            // noMorePages(user) Todo: application should answer to callback query when music are not found! but method returns SendMessage
+            // Todo uncomment when context attributes will work
+            //errorAlert(update, NO_MORE_PAGES);
             return Optional.empty();
         }
 
@@ -63,11 +63,12 @@ public class MusicCatalogServiceImpl implements MusicCatalogService {
         List<MusicDTO> musics = musicService.find(paginationCallback.getMusic(), pagination);
         if (musics.isEmpty()) {
             log.debug("Musics are not found! Music name: {}", paginationCallback.getMusic());
-            // noMorePages(user) Todo: application should answer to callback query when music are not found! but method returns SendMessage
+            // Todo uncomment when context attributes will work
+            // musicNotFound(user);
             return Optional.empty();
         }
 
-        return Optional.of(buildMessage(user, musics, pagination, paginationCallback.getMusic()));
+        return Optional.of(buildMessage(user, musics, pagination, paginationCallback.getMusic(), update.getCallbackQuery().getMessage().getMessageId()));
     }
 
     @Override
@@ -110,30 +111,51 @@ public class MusicCatalogServiceImpl implements MusicCatalogService {
         return page < 0;
     }
 
-    private SendMessage noMorePages(User user) {
+    private void errorAlert(Update update, String messageKey) {
+
+        User user = UserUtils.extractUserOrThrow(update);
+        String callbackQueryId = update.getCallbackQuery().getId();
 
         ResourceBundle bundle = ResourceBundleUtils.getBundle(user.getLanguageCode());
 
-        String text = bundle.getString(MUSIC_NOT_FOUND_KEY);
+        String text = bundle.getString(messageKey);
+
+        AnswerCallbackQuery answerCallbackQuery = new AnswerCallbackQuery();
+        answerCallbackQuery.setText(text);
+        answerCallbackQuery.setShowAlert(true);
+        answerCallbackQuery.setCacheTime(5);
+        answerCallbackQuery.setCallbackQueryId(callbackQueryId);
+
+        // Todo: Remove or fix
+        // AbsSenderUtils.send(answerCallbackQuery);
+    }
+
+    private void musicNotFound(User user) {
+        ResourceBundle bundle = ResourceBundleUtils.getBundle(user.getLanguageCode());
+
+        String text = bundle.getString(MUSIC_NOT_FOUND);
 
         SendMessage message = new SendMessage();
         message.setChatId(user.getId());
         message.setText(text);
 
-        return message;
+        // Todo: Remove or fix
+        // AbsSenderUtils.send(message);
     }
 
+    // Todo: minimize arguments
     // Todo: move it to another service like button builders
-    private SendMessage buildMessage(User user, List<MusicDTO> musics, PageDTO pagination, String musicName) {
+    private EditMessageText buildMessage(User user, List<MusicDTO> musics, PageDTO pagination, String musicName, int messageId) {
 
         String text = buildMessageText(musics);
 
         InlineKeyboardMarkup inlineMarkup = (InlineKeyboardMarkup) buildButtons(musics, pagination, musicName);
 
-        SendMessage message = new SendMessage();
+        EditMessageText message = new EditMessageText();
         message.setChatId(user.getId());
         message.setText(text);
         message.setReplyMarkup(inlineMarkup);
+        message.setMessageId(messageId);
 
         return message;
     }

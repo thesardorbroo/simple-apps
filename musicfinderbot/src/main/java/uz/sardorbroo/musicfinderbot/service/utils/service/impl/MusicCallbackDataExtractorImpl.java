@@ -31,13 +31,13 @@ public class MusicCallbackDataExtractorImpl implements CallbackDataExtractor {
         }
 
         String[] data = text.split(DELIMITER);
-        if (Objects.equals(SPLINTED_STRINGS_LENGTH, data.length)) {
+        if (!Objects.equals(SPLINTED_STRINGS_LENGTH, data.length)) {
             log.warn("Invalid callback data!");
             return Optional.empty();
         }
 
-        String musicName = data[1];
-        MusicCallbackDTO musicCallback = new MusicCallbackDTO(SUPPORTED_PREFIX, musicName);
+        String musicId = data[1];
+        MusicCallbackDTO musicCallback = new MusicCallbackDTO(SUPPORTED_PREFIX, musicId);
         return Optional.of(musicCallback);
     }
 }

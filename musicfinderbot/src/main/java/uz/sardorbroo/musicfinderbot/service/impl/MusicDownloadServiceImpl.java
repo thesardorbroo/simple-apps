@@ -1,7 +1,6 @@
 package uz.sardorbroo.musicfinderbot.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendAudio;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -47,6 +46,9 @@ public class MusicDownloadServiceImpl implements MusicDownloadService {
         SendAudio audio = new SendAudio();
         audio.setAudio(inputFile);
         audio.setChatId(user.getId());
+
+        // Todo uncomment when context attributes will work
+        // AbsSenderUtils.send(audio);
 
         return Optional.of(audio);
     }
