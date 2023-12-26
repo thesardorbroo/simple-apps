@@ -40,7 +40,7 @@ public class SpotifyRapidApiClientServiceImpl implements SpotifyClientService {
     private static final String RAPID_API_KEY_HEADER_NAME = "X-RapidAPI-Key";
     private static final String RAPID_API_HOST_HEADER_NAME = "X-RapidAPI-Host";
 
-    @Value("${music.service.credentials.secret:no secret}")
+    @Value("${music.service.rapid-api.credentials.secret:no secret}")
     private String secret;
 
     @Value("${music.service.spotify.url}")
