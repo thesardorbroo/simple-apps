@@ -4,14 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="56c1f33f-94b3-4a21-9790-e6037ec19148" name="Changes" comment="">
+    <list default="true" id="56c1f33f-94b3-4a21-9790-e6037ec19148" name="Changes" comment="Temporary storage service(interface) is added. Musics name adds when user downloads the music">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/config/SpotifyConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/SpotifyImanzonClientServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/music-finder-docker/freyr-config/conf.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/controller/MusicDownloadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/controller/MusicDownloadController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/MusicCatalogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/MusicCatalogService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicCatalogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicCatalogServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicDownloadServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicDownloadServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/SongCommandServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/SongCommandServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/SpotifyMusicServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/SpotifyMusicServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/SpotifyClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/SpotifyClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/SpotifyClientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/SpotifyRapidApiClientServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/AbsSenderUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/AbsSenderUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/service/impl/MusicCallbackDataExtractorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/utils/service/impl/MusicCallbackDataExtractorImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +30,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -51,11 +60,20 @@
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/thesardorbroo/Devops-projects/simple-apps/musicfinderbot/src/main/music-finder-docker/freyr-config&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;0215526b41ab83ac1584e3421f8cf37b&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\thesardorbroo\Devops-projects\simple-apps\musicfinderbot\src\main\music-finder-docker\freyr-config" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="uz.sardorbroo.musicfinderbot.util" />
     </key>
@@ -74,6 +92,27 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="music-finder-docker/freyr.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="musicfinderbot/src/main/music-finder-docker/freyr.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="music-finder-docker/freyr.yml.freyr: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="freyr" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="musicfinderbot/src/main/music-finder-docker/freyr.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration name="music-finder-docker/redis.yml.redis: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -87,8 +126,19 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="music-finder-docker/ubuntu.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="musicfinderbot/src/main/music-finder-docker/ubuntu.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.music-finder-docker/ubuntu.yml: Compose Deployment" />
+        <item itemvalue="Docker.music-finder-docker/freyr.yml: Compose Deployment" />
+        <item itemvalue="Docker.music-finder-docker/freyr.yml.freyr: Compose Deployment" />
         <item itemvalue="Docker.music-finder-docker/redis.yml.redis: Compose Deployment" />
       </list>
     </recent_temporary>
@@ -107,6 +157,14 @@
       <workItem from="1703008583383" duration="7377000" />
       <workItem from="1703050225801" duration="4880000" />
       <workItem from="1703086192528" duration="8372000" />
+      <workItem from="1703337494728" duration="5950000" />
+      <workItem from="1703362506838" duration="6028000" />
+      <workItem from="1703411640047" duration="7975000" />
+      <workItem from="1703436626902" duration="10897000" />
+      <workItem from="1703514810612" duration="1061000" />
+      <workItem from="1703574409326" duration="1133000" />
+      <workItem from="1703575554731" duration="3012000" />
+      <workItem from="1703615633511" duration="5925000" />
     </task>
     <task id="LOCAL-00001" summary="Temporary storage service(interface) is added. Musics name adds when user downloads the music">
       <created>1702759259516</created>
@@ -118,17 +176,39 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Temporary storage service(interface) is added. Musics name adds when user downloads the music" />
-    <option name="LAST_COMMIT_MESSAGE" value="Temporary storage service(interface) is added. Musics name adds when user downloads the music" />
+    <MESSAGE value="Spotify requesting is changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Spotify requesting is changed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/SpotifyMusicServiceImpl.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/SpotifyRapidApiClientServiceImpl.java</url>
+          <line>117</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/SpotifyImanzonClientServiceImpl.java</url>
+          <line>143</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/SpotifyImanzonClientServiceImpl.java</url>
+          <line>187</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -19,7 +19,6 @@ import java.util.UnknownFormatConversionException;
 public class AbsSenderUtils {
     private static final String ABS_SENDER_KEY = "ABS_SENDER";
 
-    // Not works
     public static void setContext(AbsSender sender) {
 
         UpdateAttributes attributes = FluentContextHolder.getAttributes();
@@ -27,7 +26,6 @@ public class AbsSenderUtils {
         attributes.setAttribute(ABS_SENDER_KEY, sender);
     }
 
-    // Not works
     public static Optional<AbsSender> getAbsSender() {
         UpdateAttributes attributes = FluentContextHolder.getAttributes();
 
@@ -41,7 +39,6 @@ public class AbsSenderUtils {
         }
     }
 
-    // Todo: optimize it. these if conditions are not good.
     public static void send(AbsSender sender, Object tgObject) {
 
         if (tgObject instanceof SendMessage sendMessage) {
@@ -55,6 +52,15 @@ public class AbsSenderUtils {
         } else {
             throw new UnknownFormatConversionException("Unknown type of telegram object!");
         }
+    }
+
+    public static void send(Object tgObject) {
+        Optional<AbsSender> senderOptional = getAbsSender();
+        if (senderOptional.isEmpty()) {
+            throw new RuntimeException("AbsSender is not found from context!");
+        }
+
+        send(senderOptional.get(), tgObject);
     }
 
     private static <T extends Serializable, R extends BotApiMethod<T>> void send(AbsSender sender, R source) {
