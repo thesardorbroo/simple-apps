@@ -1,0 +1,32 @@
+logging:
+  level:
+    uz.sardorbroo.musicfinderbot: INFO
+
+fluent:
+  bot:
+    token: ${BOT_TOKEN:token}
+    username: ${BOT_USERNAME:username}
+    process-type: update
+
+music:
+  service:
+    simulate: false
+    rapid-api:
+      credentials:
+        secret: ${RAPID_API_SECRET}
+    spotify:
+      url: https://spotify23.p.rapidapi.com
+      service: rapid-api
+      credentials:
+        clientId: ${SPOTIFY_CLIENT_ID}
+        clientSecret: ${SPOTIFY_CLIENT_SECRET}
+
+cache:
+  storage:
+    type: REDIS
+
+spring:
+  config:
+    # Create the file and fill all secrets there. For example: BOT_TOKEN: your_token
+    # This is a safety way of storing personal credentials
+    import: application-secret.yml
