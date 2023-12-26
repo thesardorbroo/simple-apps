@@ -30,8 +30,7 @@ public class MusicDownloadController {
     @HandleCallback(values = CallbackPrefix.MUSIC_ID_PREFIX, scope = MatchScope.START_WITH)
     public void handleMusic(Update update, AbsSender sender) {
         log.debug("Callback message is handled");
-        // Todo uncomment when context attributes will work
-        // AbsSenderUtils.setContext(sender);
+        AbsSenderUtils.setContext(sender);
         Optional<SendAudio> audioOptional = musicDownloadService.download(update);
         audioOptional.ifPresent(audio -> AbsSenderUtils.send(sender, audio));
         log.debug("Successfully answered!");
@@ -40,8 +39,7 @@ public class MusicDownloadController {
     @HandleCallback(values = CallbackPrefix.PAGE_PREFIX, scope = MatchScope.START_WITH)
     public void handlePagination(Update update, AbsSender sender) {
         log.debug("Callback for controlling pagination");
-        // Todo uncomment when context attributes will work
-        // AbsSenderUtils.setContext(sender);
+        AbsSenderUtils.setContext(sender);
         Optional<EditMessageText> audioOptional = musicCatalogService.controlPagination(update);
         audioOptional.ifPresent(audio -> AbsSenderUtils.send(sender, audio));
         log.debug("Successfully answered!");
@@ -50,8 +48,7 @@ public class MusicDownloadController {
     @HandleCallback(values = CallbackPrefix.CANCEL_PREFIX, scope = MatchScope.EQUALS)
     public void handCancel(Update update, AbsSender sender) {
         log.debug("Callback for canceling music dashboard");
-        // Todo uncomment when context attributes will work
-        // AbsSenderUtils.setContext(sender);
+        AbsSenderUtils.setContext(sender);
         Optional<EditMessageText> messageOptional = musicCatalogService.cancelMusicDashboard(update);
         messageOptional.ifPresent(message -> AbsSenderUtils.send(sender, message));
         log.debug("Successfully answered!");

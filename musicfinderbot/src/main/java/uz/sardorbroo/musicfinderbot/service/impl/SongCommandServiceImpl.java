@@ -19,6 +19,7 @@ import uz.sardorbroo.musicfinderbot.service.utils.ResourceBundleUtils;
 import uz.sardorbroo.musicfinderbot.service.utils.SendMessageUtils;
 import uz.sardorbroo.musicfinderbot.service.utils.UserUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -127,10 +128,22 @@ public class SongCommandServiceImpl implements CommandService {
         StringBuilder text = new StringBuilder();
 
         musics.forEach(music -> {
-            String line = String.format("%d. %s - %s | %s\n", counter.getAndIncrement(), music.getArtist(), music.getTitle(), music.getDuration());
+            String duration = resolveDuration(music.getDuration());
+            String line = String.format("%d. %s - %s | %s\n", counter.getAndIncrement(), music.getArtist(), music.getTitle(), duration);
             text.append(line);
         });
 
         return text.toString();
+    }
+
+    private String resolveDuration(long durationAsLong) {
+
+        Date date = new Date(durationAsLong);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("mm:ss");
+
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        return formatter.format(date);
     }
 }

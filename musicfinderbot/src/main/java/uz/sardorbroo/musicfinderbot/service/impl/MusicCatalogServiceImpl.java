@@ -15,15 +15,14 @@ import uz.sardorbroo.musicfinderbot.service.MusicCatalogService;
 import uz.sardorbroo.musicfinderbot.service.MusicService;
 import uz.sardorbroo.musicfinderbot.service.dto.MusicDTO;
 import uz.sardorbroo.musicfinderbot.service.dto.PageDTO;
+import uz.sardorbroo.musicfinderbot.service.utils.AbsSenderUtils;
 import uz.sardorbroo.musicfinderbot.service.utils.CallbackDataExtractorUtils;
 import uz.sardorbroo.musicfinderbot.service.utils.ResourceBundleUtils;
 import uz.sardorbroo.musicfinderbot.service.utils.UserUtils;
 import uz.sardorbroo.musicfinderbot.service.utils.service.dto.PaginationCallbackDTO;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
@@ -54,8 +53,7 @@ public class MusicCatalogServiceImpl implements MusicCatalogService {
         PaginationCallbackDTO paginationCallback = paginationCallbackOptional.get();
         if (isPageNegative(paginationCallback.getPage())) {
             log.debug("Page is negative! Page: {}", paginationCallback.getPage());
-            // Todo uncomment when context attributes will work
-            //errorAlert(update, NO_MORE_PAGES);
+            errorAlert(update, NO_MORE_PAGES);
             return Optional.empty();
         }
 
@@ -63,8 +61,7 @@ public class MusicCatalogServiceImpl implements MusicCatalogService {
         List<MusicDTO> musics = musicService.find(paginationCallback.getMusic(), pagination);
         if (musics.isEmpty()) {
             log.debug("Musics are not found! Music name: {}", paginationCallback.getMusic());
-            // Todo uncomment when context attributes will work
-            // musicNotFound(user);
+            musicNotFound(user);
             return Optional.empty();
         }
 
@@ -126,8 +123,7 @@ public class MusicCatalogServiceImpl implements MusicCatalogService {
         answerCallbackQuery.setCacheTime(5);
         answerCallbackQuery.setCallbackQueryId(callbackQueryId);
 
-        // Todo: Remove or fix
-        // AbsSenderUtils.send(answerCallbackQuery);
+        AbsSenderUtils.send(answerCallbackQuery);
     }
 
     private void musicNotFound(User user) {
@@ -139,8 +135,7 @@ public class MusicCatalogServiceImpl implements MusicCatalogService {
         message.setChatId(user.getId());
         message.setText(text);
 
-        // Todo: Remove or fix
-        // AbsSenderUtils.send(message);
+        AbsSenderUtils.send(message);
     }
 
     // Todo: minimize arguments
@@ -168,10 +163,22 @@ public class MusicCatalogServiceImpl implements MusicCatalogService {
         StringBuilder text = new StringBuilder();
 
         musics.forEach(music -> {
-            String line = String.format("%d. %s - %s | %s\n", counter.getAndIncrement(), music.getArtist(), music.getTitle(), String.valueOf(music.getDuration()));
+            String duration = resolveDuration(music.getDuration());
+            String line = String.format("%d. %s - %s | %s\n", counter.getAndIncrement(), music.getArtist(), music.getTitle(), duration);
             text.append(line);
         });
 
         return text.toString();
+    }
+
+    private String resolveDuration(long durationAsLong) {
+
+        Date date = new Date(durationAsLong);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("mm:ss");
+
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        return formatter.format(date);
     }
 }

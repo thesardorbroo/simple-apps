@@ -47,9 +47,6 @@ public class MusicDownloadServiceImpl implements MusicDownloadService {
         audio.setAudio(inputFile);
         audio.setChatId(user.getId());
 
-        // Todo uncomment when context attributes will work
-        // AbsSenderUtils.send(audio);
-
         return Optional.of(audio);
     }
 

@@ -19,9 +19,27 @@
     <properties>
         <java.version>17</java.version>
         <jedis.version>4.3.1</jedis.version>
+        <java-fluent.version>1.0.2</java-fluent.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+        <dependency>
+            <groupId>com.github.imanzano</groupId>
+            <artifactId>spotify-web-api-java</artifactId>
+            <version>1.5.4.9-beta</version>
+        </dependency>
+        <dependency>
+            <groupId>se.michaelthelin.spotify</groupId>
+            <artifactId>spotify-web-api-java</artifactId>
+            <version>1.5.0</version>
+        </dependency>
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
@@ -44,7 +62,7 @@
         <dependency>
             <groupId>io.github.nurislom373</groupId>
             <artifactId>spring-boot-starter-fluent</artifactId>
-            <version>1.0.1</version>
+            <version>${java-fluent.version}</version>
         </dependency>
     </dependencies>
 

@@ -11,9 +11,7 @@ import uz.sardorbroo.musicfinderbot.service.dto.spotify.SpotifyTrackResourceDTO;
 import uz.sardorbroo.musicfinderbot.service.enumeration.MusicSourceType;
 import uz.sardorbroo.musicfinderbot.service.integration.SpotifyClientService;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -38,27 +36,17 @@ public class SpotifyMusicServiceImpl implements SpotifyMusicService {
             return Optional.empty();
         }
 
-        byte[] musicAsByte = clientService.download(musicId);
-        if (Objects.isNull(musicAsByte) || isByteArrayEmpty(musicAsByte)) {
+        Optional<InputStream> inputStreamOptional = clientService.download(musicId);
+        if (inputStreamOptional.isEmpty()) {
             log.warn("Music is not downloaded!");
             return Optional.empty();
         }
 
-        InputStream musicIS = convert(musicAsByte);
-
         SpotifyTrackResourceDTO track = new SpotifyTrackResourceDTO();
-        track.setInputStream(musicIS);
+        track.setInputStream(inputStreamOptional.get());
         track.setName(TEMP_MUSIC_NAME);
         track.setId(musicId);
 
         return Optional.of(track);
-    }
-
-    private InputStream convert(byte[] musicArray) {
-        return new ByteArrayInputStream(musicArray);
-    }
-
-    private boolean isByteArrayEmpty(byte[] array) {
-        return array.length == 0;
     }
 }
