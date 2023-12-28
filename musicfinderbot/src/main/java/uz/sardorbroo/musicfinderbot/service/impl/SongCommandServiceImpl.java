@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
+import uz.sardorbroo.musicfinderbot.config.properties.FluentProperties;
 import uz.sardorbroo.musicfinderbot.enumeration.Command;
 import uz.sardorbroo.musicfinderbot.service.CommandService;
 import uz.sardorbroo.musicfinderbot.service.MusicService;
@@ -32,9 +33,23 @@ public class SongCommandServiceImpl implements CommandService {
     private static final Command SUPPORTED_COMMAND = Command.SONG;
 
     private final MusicService musicService;
+    private final FluentProperties properties;
+    private final Boolean enable;
 
-    public SongCommandServiceImpl(MusicService musicService) {
+    public SongCommandServiceImpl(MusicService musicService, FluentProperties properties) {
         this.musicService = musicService;
+        this.properties = properties;
+        this.enable = isCommandServiceEnable();
+    }
+
+    @Override
+    public boolean supported(Command command) {
+        return Objects.nonNull(command) && Objects.equals(SUPPORTED_COMMAND, command);
+    }
+
+    @Override
+    public boolean isEnable() {
+        return this.enable;
     }
 
     @Override
@@ -61,11 +76,6 @@ public class SongCommandServiceImpl implements CommandService {
         }
 
         return buildMessage(user, musics, musicName.toString());
-    }
-
-    @Override
-    public boolean supported(Command command) {
-        return Objects.nonNull(command) && Objects.equals(SUPPORTED_COMMAND, command);
     }
 
     private boolean isMessageInvalid(String message) {
@@ -108,5 +118,9 @@ public class SongCommandServiceImpl implements CommandService {
                 .setTextBuilder(textBuilder)
                 .setButtonBuilder(buttonBuilder)
                 .build();
+    }
+
+    private boolean isCommandServiceEnable() {
+        return properties.getCommands().contains(SUPPORTED_COMMAND);
     }
 }

@@ -11,4 +11,6 @@ public interface CommandService {
     Optional<SendMessage> execute(Update update);
 
     boolean supported(Command command);
+
+    boolean isEnable();
 }
