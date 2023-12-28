@@ -1,27 +1,26 @@
 package uz.sardorbroo.musicfinderbot.service.impl;
 
-import jakarta.ws.rs.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import uz.sardorbroo.musicfinderbot.enumeration.Command;
 import uz.sardorbroo.musicfinderbot.service.CommandService;
-import uz.sardorbroo.musicfinderbot.service.MusicCatalogButtonService;
 import uz.sardorbroo.musicfinderbot.service.MusicService;
+import uz.sardorbroo.musicfinderbot.service.builder.ButtonBuilder;
+import uz.sardorbroo.musicfinderbot.service.builder.TextBuilder;
+import uz.sardorbroo.musicfinderbot.service.builder.impl.InlineKeyboardBuilder;
+import uz.sardorbroo.musicfinderbot.service.builder.impl.MessageTextBuilder;
+import uz.sardorbroo.musicfinderbot.service.builder.impl.PlainSendMessageManager;
 import uz.sardorbroo.musicfinderbot.service.dto.MusicDTO;
 import uz.sardorbroo.musicfinderbot.service.dto.PageDTO;
 import uz.sardorbroo.musicfinderbot.service.utils.ResourceBundleUtils;
 import uz.sardorbroo.musicfinderbot.service.utils.SendMessageUtils;
 import uz.sardorbroo.musicfinderbot.service.utils.UserUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Service
@@ -33,11 +32,9 @@ public class SongCommandServiceImpl implements CommandService {
     private static final Command SUPPORTED_COMMAND = Command.SONG;
 
     private final MusicService musicService;
-    private final MusicCatalogButtonService musicCatalogButtonService;
 
-    public SongCommandServiceImpl(MusicService musicService, MusicCatalogButtonService musicCatalogButtonService) {
+    public SongCommandServiceImpl(MusicService musicService) {
         this.musicService = musicService;
-        this.musicCatalogButtonService = musicCatalogButtonService;
     }
 
     @Override
@@ -63,7 +60,7 @@ public class SongCommandServiceImpl implements CommandService {
             return Optional.of(musicNotFound(user));
         }
 
-        return Optional.of(buildMessage(user, musics, DEFAULT_PAGEABLE, musicName.toString()));
+        return buildMessage(user, musics, musicName.toString());
     }
 
     @Override
@@ -102,48 +99,14 @@ public class SongCommandServiceImpl implements CommandService {
         return message;
     }
 
-    private SendMessage buildMessage(User user, List<MusicDTO> musics, PageDTO pagination, String musicName) {
+    private Optional<SendMessage> buildMessage(User user, List<MusicDTO> musics, String musicName) {
 
-        String text = buildMessageText(musics);
+        TextBuilder textBuilder = new MessageTextBuilder();
+        ButtonBuilder buttonBuilder = new InlineKeyboardBuilder(DEFAULT_PAGEABLE, musicName);
 
-        InlineKeyboardMarkup inlineMarkup = (InlineKeyboardMarkup) buildButtons(musics, pagination, musicName)
-                .orElseThrow(() -> new NotFoundException("Inline buttons are not found!"));
-
-        SendMessage message = new SendMessage();
-        message.setChatId(user.getId());
-        message.setText(text);
-        message.setReplyMarkup(inlineMarkup);
-
-        return message;
-    }
-
-    private Optional<ReplyKeyboard> buildButtons(List<MusicDTO> musics, PageDTO pagination, String musicName) {
-        return musicCatalogButtonService.buildButtons(musics, pagination, musicName);
-    }
-
-    private String buildMessageText(List<MusicDTO> musics) {
-
-        AtomicInteger counter = new AtomicInteger(1);
-
-        StringBuilder text = new StringBuilder();
-
-        musics.forEach(music -> {
-            String duration = resolveDuration(music.getDuration());
-            String line = String.format("%d. %s - %s | %s\n", counter.getAndIncrement(), music.getArtist(), music.getTitle(), duration);
-            text.append(line);
-        });
-
-        return text.toString();
-    }
-
-    private String resolveDuration(long durationAsLong) {
-
-        Date date = new Date(durationAsLong);
-
-        SimpleDateFormat formatter = new SimpleDateFormat("mm:ss");
-
-        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-
-        return formatter.format(date);
+        return PlainSendMessageManager.builder(musics, String.valueOf(user.getId()))
+                .setTextBuilder(textBuilder)
+                .setButtonBuilder(buttonBuilder)
+                .build();
     }
 }

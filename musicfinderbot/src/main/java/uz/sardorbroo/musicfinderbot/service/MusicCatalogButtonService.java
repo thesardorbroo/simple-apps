@@ -7,6 +7,7 @@ import uz.sardorbroo.musicfinderbot.service.dto.PageDTO;
 import java.util.List;
 import java.util.Optional;
 
+@Deprecated
 public interface MusicCatalogButtonService {
 
     Optional<ReplyKeyboard> buildButtons(List<MusicDTO> musics, PageDTO pagination, String musicName);
