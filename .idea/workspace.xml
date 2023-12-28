@@ -4,23 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="56c1f33f-94b3-4a21-9790-e6037ec19148" name="Changes" comment="Temporary storage service(interface) is added. Musics name adds when user downloads the music">
-      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/builder/Builder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/builder/ButtonBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/builder/MessageManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/builder/TextBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/builder/dto/BuilderDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/builder/dto/ButtonBuilderDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/builder/dto/InlineButtonBuilderDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/builder/impl/InlineKeyboardBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/builder/impl/MessageTextBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/builder/impl/PlainSendMessageManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/builder/impl/ReplyKeyboardBuilder.java" afterDir="false" />
+    <list default="true" id="56c1f33f-94b3-4a21-9790-e6037ec19148" name="Changes" comment=".idea/workspace.xml is added to .gitignore">
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/config/CommandConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/config/properties/FluentProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/BotRestTemplateClientService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/MusicCatalogButtonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/MusicCatalogButtonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicCatalogButtonServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicCatalogButtonServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicCatalogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/MusicCatalogServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/enumeration/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/enumeration/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/CommandService.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/CommandService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/CommandManagerServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/CommandManagerServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/SongCommandServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/SongCommandServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/StartHelpCommandServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/impl/StartHelpCommandServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/BotClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/BotClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/BotClientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/BotAbsSenderClientServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicfinderbot/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/musicfinderbot/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -151,9 +148,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Docker.music-finder-docker/ubuntu.yml: Compose Deployment" />
+        <item itemvalue="Docker.music-finder-docker/redis.yml.redis: Compose Deployment" />
         <item itemvalue="Docker.music-finder-docker/freyr.yml: Compose Deployment" />
         <item itemvalue="Docker.music-finder-docker/freyr.yml.freyr: Compose Deployment" />
-        <item itemvalue="Docker.music-finder-docker/redis.yml.redis: Compose Deployment" />
+        <item itemvalue="Docker.music-finder-docker/ubuntu.yml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -180,6 +178,7 @@
       <workItem from="1703575554731" duration="3012000" />
       <workItem from="1703615633511" duration="5925000" />
       <workItem from="1703745216931" duration="15732000" />
+      <workItem from="1703789608988" duration="5618000" />
     </task>
     <task id="LOCAL-00001" summary="Temporary storage service(interface) is added. Musics name adds when user downloads the music">
       <created>1702759259516</created>
@@ -188,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702759259516</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary=".idea/workspace.xml is added to .gitignore">
+      <created>1703768755287</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1703768755287</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,30 +211,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Temporary storage service(interface) is added. Musics name adds when user downloads the music" />
     <MESSAGE value="Spotify requesting is changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Spotify requesting is changed" />
+    <MESSAGE value=".idea/workspace.xml is added to .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value=".idea/workspace.xml is added to .gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/SpotifyRapidApiClientServiceImpl.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/SpotifyImanzonClientServiceImpl.java</url>
-          <line>143</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/integration/impl/SpotifyImanzonClientServiceImpl.java</url>
-          <line>187</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/service/builder/impl/InlineKeyboardBuilder.java</url>
-          <line>71</line>
-          <option name="timeStamp" value="11" />
+          <url>file://$PROJECT_DIR$/musicfinderbot/src/main/java/uz/sardorbroo/musicfinderbot/config/CommandConfig.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

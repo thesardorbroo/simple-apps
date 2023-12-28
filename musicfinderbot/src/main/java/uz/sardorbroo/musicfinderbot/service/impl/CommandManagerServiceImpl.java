@@ -47,6 +47,7 @@ public class CommandManagerServiceImpl implements CommandManagerService {
         }
 
         return commandServices.stream()
+                .filter(CommandService::isEnable)
                 .filter(commandService -> commandService.supported(commandOptional.get()))
                 .map(commandService -> commandService.execute(update))
                 .findFirst()

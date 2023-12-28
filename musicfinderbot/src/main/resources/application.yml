@@ -7,6 +7,10 @@ fluent:
     token: ${BOT_TOKEN:token}
     username: ${BOT_USERNAME:username}
     process-type: update
+    commands:
+      - /start
+      - /help
+      - /song
 
 music:
   service:
