@@ -29,8 +29,6 @@ public class MusicCatalogButtonServiceImpl implements MusicCatalogButtonService 
     private static final String CANCEL_BUTTON_TEXT = "❌";
     private static final String NEXT_BUTTON_TEXT = "➡️";
 
-    // Todo: Should optimize this.
-    // Todo: Minimize arguments
     @Override
     public Optional<ReplyKeyboard> buildButtons(List<MusicDTO> musics, PageDTO pagination, String musicName) {
 

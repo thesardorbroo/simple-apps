@@ -9,10 +9,13 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
-import uz.sardorbroo.musicfinderbot.service.MusicCatalogButtonService;
 import uz.sardorbroo.musicfinderbot.service.MusicCatalogService;
 import uz.sardorbroo.musicfinderbot.service.MusicService;
+import uz.sardorbroo.musicfinderbot.service.builder.ButtonBuilder;
+import uz.sardorbroo.musicfinderbot.service.builder.TextBuilder;
+import uz.sardorbroo.musicfinderbot.service.builder.impl.InlineKeyboardBuilder;
+import uz.sardorbroo.musicfinderbot.service.builder.impl.MessageTextBuilder;
+import uz.sardorbroo.musicfinderbot.service.builder.impl.PlainSendMessageManager;
 import uz.sardorbroo.musicfinderbot.service.dto.MusicDTO;
 import uz.sardorbroo.musicfinderbot.service.dto.PageDTO;
 import uz.sardorbroo.musicfinderbot.service.utils.AbsSenderUtils;
@@ -21,9 +24,10 @@ import uz.sardorbroo.musicfinderbot.service.utils.ResourceBundleUtils;
 import uz.sardorbroo.musicfinderbot.service.utils.UserUtils;
 import uz.sardorbroo.musicfinderbot.service.utils.service.dto.PaginationCallbackDTO;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 @Slf4j
 @Service
@@ -33,11 +37,9 @@ public class MusicCatalogServiceImpl implements MusicCatalogService {
     private static final String SEARCHING_CANCELED = "searching.canceled";
 
     private final MusicService musicService;
-    private final MusicCatalogButtonService musicCatalogButtonService;
 
-    public MusicCatalogServiceImpl(MusicService musicService, MusicCatalogButtonService musicCatalogButtonService) {
+    public MusicCatalogServiceImpl(MusicService musicService) {
         this.musicService = musicService;
-        this.musicCatalogButtonService = musicCatalogButtonService;
     }
 
     public Optional<EditMessageText> controlPagination(Update update) {
@@ -99,11 +101,6 @@ public class MusicCatalogServiceImpl implements MusicCatalogService {
         return markup;
     }
 
-    private ReplyKeyboard buildButtons(List<MusicDTO> musics, PageDTO pagination, String musicName) {
-        return musicCatalogButtonService.buildButtons(musics, pagination, musicName)
-                .orElseThrow(() -> new NotFoundException("Inline buttons are not found!"));
-    }
-
     private boolean isPageNegative(int page) {
         return page < 0;
     }
@@ -139,46 +136,30 @@ public class MusicCatalogServiceImpl implements MusicCatalogService {
     }
 
     // Todo: minimize arguments
-    // Todo: move it to another service like button builders
     private EditMessageText buildMessage(User user, List<MusicDTO> musics, PageDTO pagination, String musicName, int messageId) {
 
-        String text = buildMessageText(musics);
-
-        InlineKeyboardMarkup inlineMarkup = (InlineKeyboardMarkup) buildButtons(musics, pagination, musicName);
+        Optional<SendMessage> messageOptional = buildMessage(musics, String.valueOf(user.getId()), pagination, musicName);
+        if (messageOptional.isEmpty()) {
+            throw new NotFoundException("SendMessage object is not found!");
+        }
 
         EditMessageText message = new EditMessageText();
         message.setChatId(user.getId());
-        message.setText(text);
-        message.setReplyMarkup(inlineMarkup);
+        message.setText(messageOptional.get().getText());
+        message.setReplyMarkup((InlineKeyboardMarkup) messageOptional.get().getReplyMarkup());
         message.setMessageId(messageId);
 
         return message;
     }
 
-    // Todo: move it to another service like button builders
-    private String buildMessageText(List<MusicDTO> musics) {
+    private Optional<SendMessage> buildMessage(List<MusicDTO> musics, String chatId, PageDTO pagination, String musicName) {
 
-        AtomicInteger counter = new AtomicInteger(1);
+        TextBuilder textBuilder = new MessageTextBuilder();
+        ButtonBuilder buttonBuilder = new InlineKeyboardBuilder(pagination, musicName);
 
-        StringBuilder text = new StringBuilder();
-
-        musics.forEach(music -> {
-            String duration = resolveDuration(music.getDuration());
-            String line = String.format("%d. %s - %s | %s\n", counter.getAndIncrement(), music.getArtist(), music.getTitle(), duration);
-            text.append(line);
-        });
-
-        return text.toString();
-    }
-
-    private String resolveDuration(long durationAsLong) {
-
-        Date date = new Date(durationAsLong);
-
-        SimpleDateFormat formatter = new SimpleDateFormat("mm:ss");
-
-        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-
-        return formatter.format(date);
+        return PlainSendMessageManager.builder(musics, chatId)
+                .setTextBuilder(textBuilder)
+                .setButtonBuilder(buttonBuilder)
+                .build();
     }
 }
